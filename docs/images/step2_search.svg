@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="320" viewBox="0 0 880 320">
+<rect width="880" height="320" fill="#f8fafc"/>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker></defs>
+<text font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#1e293b" text-anchor="middle"><tspan x="440.0" y="56.0">Step 2 — Multi-Mission Search</tspan></text>
+<line x1="254.0" y1="183.0" x2="330.0" y2="126.0" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="254.0" y1="183.0" x2="330.0" y2="240.0" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="550.0" y1="126.0" x2="626.0" y2="183.0" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="550.0" y1="240.0" x2="626.0" y2="183.0" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="34" y="137.0" width="220" height="92" rx="14" fill="#ffffff" stroke="#eab308" stroke-width="1.6"/>
+<text font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#1e293b" text-anchor="middle"><tspan x="144.0" y="167.0">🗺️ Your AOI</tspan></text>
+<text font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="11.5" font-weight="500" fill="#64748b" text-anchor="middle"><tspan x="144.0" y="207.0">+ date range</tspan></text>
+<rect x="330" y="80.0" width="220" height="92" rx="14" fill="#ffffff" stroke="#eab308" stroke-width="1.6"/>
+<text font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#1e293b" text-anchor="middle"><tspan x="440.0" y="110.0">🌐 Google Earth Engine</tspan></text>
+<text font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="11.5" font-weight="500" fill="#64748b" text-anchor="middle"><tspan x="440.0" y="150.0">S2, Landsat, MODIS</tspan></text>
+<rect x="330" y="194.0" width="220" height="92" rx="14" fill="#ffffff" stroke="#eab308" stroke-width="1.6"/>
+<text font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#1e293b" text-anchor="middle"><tspan x="440.0" y="224.0">🛰️ NASA CMR archive</tspan></text>
+<text font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="11.5" font-weight="500" fill="#64748b" text-anchor="middle"><tspan x="440.0" y="264.0">S1, NISAR, S6, HLS</tspan></text>
+<rect x="626" y="137.0" width="220" height="92" rx="14" fill="#ffffff" stroke="#eab308" stroke-width="1.6"/>
+<text font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#1e293b" text-anchor="middle"><tspan x="736.0" y="167.0">📊 Combined table</tspan></text>
+<text font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="11.5" font-weight="500" fill="#64748b" text-anchor="middle"><tspan x="736.0" y="207.0">filter by coverage/cloud</tspan></text>
+</svg>
