@@ -566,7 +566,8 @@ with tab_orbit:
             map_tab, table_tab, forecast_tab = st.tabs(["Live Map", "Current Positions", "Physics-based Forecast"])
 
             with map_tab:
-                fmap = folium.Map(location=[aoi_lat, aoi_lon], zoom_start=3, tiles="CartoDB positron")
+                # OpenStreetMap needs no API key; CartoDB's tiles now watermark without one.
+                fmap = folium.Map(location=[aoi_lat, aoi_lon], zoom_start=3, tiles="OpenStreetMap")
                 geojson_data = json.loads(geojson_path.read_text())
                 ring = geojson_data["features"][0]["geometry"]["coordinates"][0]
                 folium.Polygon(

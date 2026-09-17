@@ -38,6 +38,14 @@ Every pipeline stage also has its own short PDF guide in [docs/pdf/](docs/pdf/),
 
 ---
 
+## See it in action
+
+Real output from a live run over a test AOI near Starkville, Mississippi — 392 scenes found across 4 sensors, filtered down to 181:
+
+<p align="center"><img src="docs/images/app/search_map.png" alt="Search results: 392 scenes found, 181 kept after filtering, with scene footprints drawn over the AOI" width="100%"></p>
+
+---
+
 ## The six stages
 
 ### 🗺️ 1. AOI Selection
@@ -46,11 +54,21 @@ Draw an area of interest on an interactive map — rectangle or polygon, one sha
 
 <p align="center"><img src="docs/images/step1_aoi.svg" alt="AOI selection flow: draw on map, export_all(), writes .geojson/.kml/.kmz" width="90%"></p>
 
+<p align="center"><img src="docs/images/app/aoi.png" alt="AOI tab: drawing tools on a satellite basemap with the saved AOI outlined in red and its area shown" width="100%"></p>
+
 ### 🔍 2. Multi-Mission Search
 
 Searches all six sensors over your AOI and date range in one pass, pulling each from wherever it actually lives, and merges everything into one filterable table with coverage %, cloud cover, resolution, and a footprint map.
 
 <p align="center"><img src="docs/images/step2_search.svg" alt="Search flow: AOI splits into Google Earth Engine and NASA CMR archive, merges into combined results table" width="90%"></p>
+
+Every product variant is queried separately, so you can see exactly what each mission did and didn't collect:
+
+<p align="center"><img src="docs/images/app/search_running.png" alt="Search in progress, showing per-product scene counts for every Sentinel, Landsat, NISAR and MODIS product" width="100%"></p>
+
+Results land in a sortable table with everything you need to filter on, and export to CSV:
+
+<p align="center"><img src="docs/images/app/search_table.png" alt="Search results table showing product, sensor, scene id, date, level, resolution and AOI coverage columns" width="100%"></p>
 
 ### ⬇️ 3. Download
 
@@ -64,11 +82,17 @@ Rather than assuming each satellite's textbook nominal revisit cycle, this looks
 
 <p align="center"><img src="docs/images/step4_forecast.svg" alt="Forecast flow: recent history feeds gap-pattern detection, projected forward into future predicted passes" width="80%"></p>
 
+Each platform's predicted passes, 90 days out — note how MODIS is near-daily while Landsat and Sentinel-2 cluster on their own repeat cycles:
+
+<p align="center"><img src="docs/images/app/forecast_timeline.png" alt="Predicted overpass timeline chart showing per-platform passes for MODIS, NISAR, Sentinel-2 and Landsat" width="100%"></p>
+
 ### 🛰️ 5. Live Orbit Tracker
 
 An independent, physics-based cross-check: pulls each satellite's live orbital elements (TLEs) from CelesTrak and propagates them forward with `skyfield` — no Earth Engine, no login, no acquisition history needed.
 
 <p align="center"><img src="docs/images/step5_orbit.svg" alt="Live tracker flow: CelesTrak TLE feeds skyfield orbit propagation, produces real-time ground track vs AOI" width="80%"></p>
+
+<p align="center"><img src="docs/images/app/orbit_map.png" alt="Live orbit tracker map showing current satellite positions and their ground tracks relative to the AOI" width="100%"></p>
 
 ### 🔗 6. GitHub Sync
 
