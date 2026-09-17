@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Satellite Data Search Toolkit"
+abstract: >
+  An end-to-end toolkit for finding, reviewing, and downloading satellite
+  imagery (Sentinel-1, Sentinel-2, Landsat 8/9, NISAR, MODIS, Sentinel-6)
+  over an area of interest, plus tools for forecasting future satellite
+  overpasses to plan field data collection.
+authors:
+  - family-names: "TODO-your-last-name"
+    given-names: "TODO-your-first-name"
+    alias: "SAY70"
+    email: "surajspce@gmail.com"
+    affiliation: "Mississippi State University"
+repository-code: "https://github.com/SAY70/satellite-data-search"
+url: "https://github.com/SAY70/satellite-data-search"
+license: MIT
+version: "1.0.0"
+date-released: "2026-09-17"
+keywords:
+  - remote sensing
+  - Google Earth Engine
+  - Sentinel-1
+  - Sentinel-2
+  - Landsat
+  - NISAR
+  - satellite imagery
+  - field campaign planning

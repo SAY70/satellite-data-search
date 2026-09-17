@@ -49,6 +49,40 @@ def outline_style(color):
     return lambda _: {"color": color, "weight": 2, "fillOpacity": 0}
 
 
+# ------------------------------------------------------------------- guides --
+
+GUIDES_DIR = Path(__file__).parent / "docs" / "pdf"
+GUIDES = {
+    "getting_started": ("00_Getting_Started.pdf", "Getting Started", "Your own accounts, connected from scratch"),
+    "aoi": ("01_AOI_Selection_Guide.pdf", "AOI Selection Guide", "How to draw and size your area of interest"),
+    "search": ("02_Search_Guide.pdf", "Search Guide", "Reading results, filters, and why a sensor shows 0"),
+    "download": ("03_Download_Guide.pdf", "Download Guide", "Credentials, sizes, and the ASF one-time step"),
+    "forecast": ("04_Forecast_Guide.pdf", "Forecast Guide", "How to read predicted-overpass confidence"),
+    "orbit": ("05_Live_Tracker_Guide.pdf", "Live Tracker Guide", "What physics-based tracking can and can't tell you"),
+    "github": ("06_GitHub_Sync_Guide.pdf", "GitHub Sync Guide", "Personal Access Tokens, step by step"),
+}
+
+
+def guide_expander(key, label="📖 Need help with this step?"):
+    """Small expander with a download button + inline preview for one guide PDF."""
+    filename, title, blurb = GUIDES[key]
+    path = GUIDES_DIR / filename
+    if not path.exists():
+        return
+    pdf_bytes = path.read_bytes()
+    with st.expander(label):
+        st.caption(f"**{title}** — {blurb}")
+        st.download_button("⬇️ Download PDF", pdf_bytes, filename, "application/pdf", key=f"dl_{key}")
+        import base64
+
+        b64 = base64.b64encode(pdf_bytes).decode()
+        st.markdown(
+            f'<iframe src="data:application/pdf;base64,{b64}" width="100%" height="500" '
+            f'style="border:1px solid #cbd5e1;border-radius:6px;"></iframe>',
+            unsafe_allow_html=True,
+        )
+
+
 # ------------------------------------------------------------- session init --
 
 defaults = {
@@ -77,7 +111,12 @@ with st.sidebar:
     st.title("🛰️ Mission Control")
 
     st.subheader("Project config")
-    ee_project = st.text_input("Earth Engine project", value="rosy-precinct-498822-e1")
+    ee_project = st.text_input(
+        "Earth Engine project", value="rosy-precinct-498822-e1",
+        help="This default belongs to the toolkit's original author and won't work for you. "
+             "Replace it with your own Google Cloud project ID — see the Getting Started guide "
+             "(Overview or Help tab) if you don't have one yet.",
+    )
     aoi_name = st.text_input("AOI name", value="my_aoi")
     output_dir = st.text_input("Output folder", value="output")
     download_dir = st.text_input("Download folder", value="downloads")
@@ -88,8 +127,17 @@ with st.sidebar:
             ee.Initialize(project=ee_project)
             st.session_state["ee_ready"] = True
             st.success("Earth Engine connected.")
-        except Exception as e:
-            st.error(f"Could not connect: {e}\n\nRun `ee.Authenticate()` once in any notebook first, then retry.")
+        except Exception:
+            try:
+                with st.spinner("Opening your browser to sign in to Google — approve access there, this will finish automatically..."):
+                    # auth_mode="localhost": a local server on this machine catches
+                    # the OAuth redirect, so there's no code to copy/paste back here.
+                    ee.Authenticate(auth_mode="localhost")
+                    ee.Initialize(project=ee_project)
+                st.session_state["ee_ready"] = True
+                st.success("Earth Engine connected.")
+            except Exception as e2:
+                st.error(f"Could not connect: {e2}")
 
     if st.session_state["ee_ready"] and st.session_state["aoi_geometry"] is None:
         geojson_path = Path(output_dir) / f"{aoi_name}.geojson"
@@ -116,8 +164,8 @@ with st.sidebar:
 
 # ------------------------------------------------------------------- tabs ---
 
-tab_home, tab_aoi, tab_search, tab_download, tab_forecast, tab_orbit, tab_github = st.tabs(
-    ["🏠 Overview", "🗺️ AOI", "🔍 Search", "⬇️ Download", "📅 Forecast", "🛰️ Live Tracker", "🔗 GitHub"]
+tab_home, tab_aoi, tab_search, tab_download, tab_forecast, tab_orbit, tab_github, tab_help = st.tabs(
+    ["🏠 Overview", "🗺️ AOI", "🔍 Search", "⬇️ Download", "📅 Forecast", "🛰️ Live Tracker", "🔗 GitHub", "📖 Help"]
 )
 
 # ============================================================== 0. OVERVIEW =
@@ -127,6 +175,15 @@ with tab_home:
         "An end-to-end pipeline for finding, reviewing, and downloading satellite imagery over an "
         "area of interest, plus tools for planning field campaigns around future satellite passes."
     )
+
+    if not st.session_state["ee_ready"]:
+        st.info(
+            "👋 **First time here?** You'll need your own free Google Earth Engine project (not the "
+            "author's) before anything connects — the **Getting Started** guide below walks through "
+            "every account you need, step by step, in about 10 minutes."
+        )
+        guide_expander("getting_started", label="📖 Open the Getting Started guide")
+
     cols = st.columns(6)
     stage_info = [
         ("🗺️", "AOI", "Draw an area of interest and export it"),
@@ -162,6 +219,7 @@ with tab_home:
 # =================================================================== 1. AOI =
 with tab_aoi:
     st.header("Area of Interest")
+    guide_expander("aoi")
 
     if not st.session_state["ee_ready"]:
         st.warning("Connect to Earth Engine from the sidebar first.")
@@ -217,6 +275,7 @@ with tab_aoi:
 # ================================================================ 2. SEARCH =
 with tab_search:
     st.header("Multi-Mission Scene Search")
+    guide_expander("search")
 
     if st.session_state["aoi_geometry"] is None:
         st.warning("Select an AOI in the **AOI** tab first.")
@@ -314,6 +373,7 @@ with tab_search:
 # ============================================================== 3. DOWNLOAD =
 with tab_download:
     st.header("Download Filtered Scenes")
+    guide_expander("download")
 
     scenes_source = st.session_state["results_df"]
     csv_path = Path(output_dir) / f"{aoi_name}_scene_search.csv"
@@ -399,6 +459,7 @@ with tab_download:
 with tab_forecast:
     st.header("Future Overpass Forecast")
     st.caption("Detects each platform's real recent revisit pattern (not just the textbook nominal cycle) and projects it forward.")
+    guide_expander("forecast")
 
     if st.session_state["aoi_geometry"] is None:
         st.warning("Select an AOI in the **AOI** tab first.")
@@ -473,6 +534,7 @@ with tab_forecast:
 with tab_orbit:
     st.header("Live Orbit Tracker")
     st.caption("Real-time satellite positions from CelesTrak TLEs, propagated with skyfield. No Earth Engine needed.")
+    guide_expander("orbit")
 
     aoi_lat, aoi_lon = None, None
     geojson_path = Path(output_dir) / f"{aoi_name}.geojson"
@@ -553,6 +615,7 @@ with tab_github:
         "Creates (if needed) a private GitHub repo and pushes this project. "
         "downloads/ is never pushed — a manifest of file names/sizes is committed instead."
     )
+    guide_expander("github")
 
     gc1, gc2 = st.columns(2)
     gh_user = gc1.text_input("GitHub username", value="")
@@ -642,3 +705,29 @@ with tab_github:
             st.success("Push complete.")
         except Exception as e:
             st.error(str(e))
+
+# ==================================================================== 7. HELP
+with tab_help:
+    st.header("Help & Guides")
+    st.write(
+        "A short PDF for every step — what it does, common gotchas, and what to do when something "
+        "returns nothing or throws an error. New to this toolkit? Start with **Getting Started**: it "
+        "walks through creating your own Earth Engine, Earthdata, and (optionally) GitHub accounts from "
+        "scratch, so everything below actually connects for you."
+    )
+    st.divider()
+
+    order = ["getting_started", "aoi", "search", "download", "forecast", "orbit", "github"]
+    for key in order:
+        filename, title, blurb = GUIDES[key]
+        path = GUIDES_DIR / filename
+        c1, c2 = st.columns([5, 1])
+        with c1:
+            st.markdown(f"**{title}**")
+            st.caption(blurb)
+        with c2:
+            if path.exists():
+                st.download_button("⬇️ PDF", path.read_bytes(), filename, "application/pdf", key=f"help_dl_{key}")
+            else:
+                st.caption("missing")
+        st.divider()
