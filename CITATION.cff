@@ -7,14 +7,14 @@ abstract: >
   over an area of interest, plus tools for forecasting future satellite
   overpasses to plan field data collection.
 authors:
-  - family-names: "TODO-your-last-name"
-    given-names: "TODO-your-first-name"
+  - family-names: "Yadav"
+    given-names: "Suraj"
     alias: "SAY70"
     email: "surajspce@gmail.com"
     affiliation: "Mississippi State University"
 repository-code: "https://github.com/SAY70/satellite-data-search"
 url: "https://github.com/SAY70/satellite-data-search"
-license: MIT
+license: GPL-3.0-only
 version: "1.0.0"
 date-released: "2026-09-17"
 keywords:

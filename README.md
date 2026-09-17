@@ -4,7 +4,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/python-3.10%2B-0f766e" alt="Python 3.10+">
-  <img src="https://img.shields.io/badge/license-MIT-0f766e" alt="MIT License">
+  <img src="https://img.shields.io/badge/license-GPL--3.0-0f766e" alt="GPL-3.0 License">
   <img src="https://img.shields.io/badge/built%20with-Streamlit-ff4b4b" alt="Built with Streamlit">
   <img src="https://img.shields.io/badge/Earth%20Engine-supported-34a853" alt="Google Earth Engine">
 </p>
@@ -110,7 +110,7 @@ Python 3.10+, and see [requirements.txt](requirements.txt). Free accounts needed
 
 ## License
 
-[MIT](LICENSE)
+[GPL-3.0](LICENSE)
 
 ## Citing this work
 
