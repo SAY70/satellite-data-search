@@ -1,0 +1,21 @@
+# Normalize line endings so files don't show as modified just because they
+# were opened on a different platform. Text is stored as LF in the repo and
+# checked out natively; binaries are never touched.
+* text=auto
+
+*.py   text diff=python
+*.ipynb text
+*.md   text
+*.txt  text
+*.cff  text
+*.geojson text
+*.kml  text
+
+*.png  binary
+*.jpg  binary
+*.pdf  binary
+*.kmz  binary
+*.zip  binary
+*.h5   binary
+*.tif  binary
+*.tiff binary

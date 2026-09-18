@@ -5,6 +5,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/python-3.10%2B-0f766e" alt="Python 3.10+">
   <img src="https://img.shields.io/badge/license-GPL--3.0-0f766e" alt="GPL-3.0 License">
+  <img src="https://img.shields.io/badge/tests-70%20passing-2ea043" alt="70 tests passing">
   <img src="https://img.shields.io/badge/built%20with-Streamlit-ff4b4b" alt="Built with Streamlit">
   <img src="https://img.shields.io/badge/Earth%20Engine-supported-34a853" alt="Google Earth Engine">
 </p>
@@ -175,6 +176,15 @@ Full details in **[docs/pdf/07_Troubleshooting.pdf](docs/pdf/07_Troubleshooting.
 | `ensurepip ... non-zero exit status 1` on Windows | Path too long (260-char limit), often a OneDrive-synced folder. Create the venv somewhere short like `C:\venvs\sds`. |
 | `401 Unauthorized` from `api.github.com` | Token expired, revoked, mistyped, or you used your password — GitHub stopped accepting passwords in 2021. |
 | MODIS footprints cover the whole world | Expected — MODIS products here are global mosaics, so `aoi_cov_pct` is always ~100 and not a useful filter. |
+
+## Tests
+
+```bash
+pip install -r requirements-dev.txt
+pytest
+```
+
+70 tests covering the pure logic — revisit-pattern detection, scene filtering, CMR footprint parsing, download path handling, AOI export round-tripping — plus cross-module consistency checks. No network, Earth Engine session, or credentials required.
 
 ## Contributing
 

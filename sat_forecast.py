@@ -160,13 +160,19 @@ def gather_history(geometry, history_start, history_end, progress_cb=None):
     return history_df, footprints
 
 
+FORECAST_COLUMNS = ["platform", "predicted_datetime_utc", "days_until", "basis", "last_observed"]
+
+
 def build_forecast(history_df, today, horizon_days):
-    """Detects each platform's real gap pattern and projects it through `horizon_days`."""
+    """Detects each platform's real gap pattern and projects it through `horizon_days`.
+
+    Platforms with no entry in NOMINAL_REPEAT_CYCLE_DAYS are skipped — a new
+    satellite (a future Sentinel-2D, say) shows up in Earth Engine metadata
+    before it's known here, and that must not take the whole forecast down.
+    """
     forecast_rows = []
     if history_df.empty:
-        return pd.DataFrame(
-            columns=["platform", "predicted_datetime_utc", "days_until", "basis", "last_observed"]
-        )
+        return pd.DataFrame(columns=FORECAST_COLUMNS)
 
     for platform, group in history_df.groupby("platform"):
         nominal_cycle = NOMINAL_REPEAT_CYCLE_DAYS.get(platform)
@@ -204,4 +210,6 @@ def build_forecast(history_df, today, horizon_days):
                 )
             i += 1
 
+    if not forecast_rows:
+        return pd.DataFrame(columns=FORECAST_COLUMNS)
     return pd.DataFrame(forecast_rows).sort_values("predicted_datetime_utc").reset_index(drop=True)

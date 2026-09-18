@@ -1,0 +1,2 @@
+# Development dependencies (not needed to run the toolkit)
+pytest>=8.0.0

@@ -58,10 +58,19 @@ Edit the content in those scripts and re-run them; don't edit the output files d
 
 ## Testing your changes
 
-There's no automated test suite yet (contributions welcome). At minimum, before opening a PR:
+```bash
+pip install -r requirements-dev.txt
+pytest
+```
+
+The suite covers the pure logic — revisit-pattern detection, scene filtering, CMR footprint parsing, download path handling, and AOI export round-tripping. It needs no network, no Earth Engine session, and no credentials, so it runs anywhere in a couple of seconds.
+
+There are also cross-module consistency checks: every searchable Earth Engine product must have a download mapping, product labels must agree between `sat_search.py` and `sat_download.py`, and every sensor must have a map colour. These catch the drift that happens when you add a sensor and update one module but not the other.
+
+What the suite deliberately does **not** cover is anything requiring live APIs. So before opening a PR, also:
 
 - Run the affected notebook end to end, or the affected tab in the app, against a real AOI.
-- If you touched search or download, confirm your change works against the live APIs — most bugs in this codebase have come from real-world API behavior, not logic errors.
+- If you touched search or download, confirm your change works against the live APIs — most bugs in this codebase have come from real-world API behaviour, not logic errors.
 - Verify the app still starts cleanly: `streamlit run app.py`.
 
 ## Reporting bugs
