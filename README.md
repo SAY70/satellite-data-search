@@ -2,6 +2,8 @@
   <img src="docs/images/banner.svg" alt="Satellite Data Search and Overpass Forecast Toolkit" width="100%">
 </p>
 
+<h1 align="center">Satellite Data Search and Overpass Forecast Toolkit</h1>
+
 <p align="center">
   <img src="https://img.shields.io/badge/python-3.10%2B-0f766e" alt="Python 3.10+">
   <img src="https://img.shields.io/badge/license-GPL--3.0-0f766e" alt="GPL-3.0 License">
