@@ -194,10 +194,18 @@ Bug reports, documentation fixes, and new sensors are all welcome — see [CONTR
 
 Credentials are never written to disk by this toolkit. See [SECURITY.md](SECURITY.md) for how each credential is handled and how to report a vulnerability privately.
 
+## Authors
+
+| | Affiliation |
+|---|---|
+| **Suraj Yadav** ([0000-0002-0666-7629](https://orcid.org/0000-0002-0666-7629)) | Mississippi State University |
+| **Nuwan Wijewardane** ([0000-0001-8962-9451](https://orcid.org/0000-0001-8962-9451)) | Department of Agricultural and Biological Engineering, Mississippi State University |
+| **Xin Zhang** | University of Georgia |
+
 ## License
 
 [GPL-3.0](LICENSE)
 
 ## Citing this work
 
-See [CITATION.cff](CITATION.cff).
+See [CITATION.cff](CITATION.cff) — GitHub renders a "Cite this repository" button from it, and Zenodo reads it automatically when you tag a release.
