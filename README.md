@@ -132,6 +132,14 @@ docs/images/                 # README diagrams (source: docs/generate_diagrams.p
 
 Python 3.10+, and see [requirements.txt](requirements.txt). Free accounts needed: [Google Earth Engine](https://code.earthengine.google.com/register), [NASA Earthdata](https://urs.earthdata.nasa.gov/) (downloads only), [GitHub](https://github.com/) (optional, for the sync feature).
 
+## Contributing
+
+Bug reports, documentation fixes, and new sensors are all welcome — see [CONTRIBUTING.md](CONTRIBUTING.md) for how the code is organized and what it takes to add a mission.
+
+## Security
+
+Credentials are never written to disk by this toolkit. See [SECURITY.md](SECURITY.md) for how each credential is handled and how to report a vulnerability privately.
+
 ## License
 
 [GPL-3.0](LICENSE)
