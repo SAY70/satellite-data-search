@@ -109,8 +109,9 @@ def banner(filename="banner.svg"):
         '<stop offset="0%" stop-color="#0f766e"/><stop offset="100%" stop-color="#134e4a"/>'
         "</linearGradient></defs>",
         f'<rect width="{width}" height="{height}" rx="18" fill="url(#bg)"/>',
-        f'<text x="{width/2}" y="98" font-family="{FONT}" font-size="42" font-weight="800" '
-        f'fill="#ffffff" text-anchor="middle">🛰️ Satellite Data Search Toolkit</text>',
+        # Size chosen so the full title fits inside the 1200px banner without clipping.
+        f'<text x="{width/2}" y="96" font-family="{FONT}" font-size="33" font-weight="800" '
+        f'fill="#ffffff" text-anchor="middle">🛰️ Satellite Data Search and Overpass Forecast Toolkit</text>',
         f'<text x="{width/2}" y="140" font-family="{FONT}" font-size="17" font-weight="500" '
         f'fill="#99f6e4" text-anchor="middle">Find &#183; review &#183; download &#183; forecast &#183; track</text>',
         f'<text x="{width/2}" y="172" font-family="{FONT}" font-size="14.5" font-weight="500" '

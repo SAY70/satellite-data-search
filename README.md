@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/images/banner.svg" alt="Satellite Data Search Toolkit" width="100%">
+  <img src="docs/images/banner.svg" alt="Satellite Data Search and Overpass Forecast Toolkit" width="100%">
 </p>
 
 <p align="center">

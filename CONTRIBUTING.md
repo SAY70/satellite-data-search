@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for your interest in improving the Satellite Data Search Toolkit. This is a research tool, and contributions of all sizes are welcome — bug reports, documentation fixes, new sensors, or new pipeline stages.
+Thanks for your interest in improving the Satellite Data Search and Overpass Forecast Toolkit. This is a research tool, and contributions of all sizes are welcome — bug reports, documentation fixes, new sensors, or new pipeline stages.
 
 ## Getting set up
 

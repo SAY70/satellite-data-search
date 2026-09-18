@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
-    <Document id="23">
-        <Style id="30">
-            <LineStyle id="31">
+    <Document id="1">
+        <Style id="8">
+            <LineStyle id="9">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <width>2</width>
             </LineStyle>
-            <PolyStyle id="32">
+            <PolyStyle id="10">
                 <colorMode>normal</colorMode>
                 <fill>0</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Placemark id="25">
+        <Placemark id="3">
             <name>my_aoi</name>
-            <styleUrl>#30</styleUrl>
-            <Polygon id="24">
+            <styleUrl>#8</styleUrl>
+            <Polygon id="2">
                 <outerBoundaryIs>
-                    <LinearRing id="28">
-                        <coordinates>-88.873316,33.396479,0.0 -88.725032,33.396479,0.0 -88.725032,33.519072,0.0 -88.873316,33.519072,0.0 -88.873316,33.396479,0.0</coordinates>
+                    <LinearRing id="6">
+                        <coordinates>-90.271265,32.217449,0.0 -90.083164,32.217449,0.0 -90.083164,32.363143,0.0 -90.271265,32.363143,0.0 -90.271265,32.217449,0.0</coordinates>
                     </LinearRing>
                 </outerBoundaryIs>
             </Polygon>

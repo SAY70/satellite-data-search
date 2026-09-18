@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
-title: "Satellite Data Search Toolkit"
+title: "Satellite Data Search and Overpass Forecast Toolkit"
 abstract: >
   An end-to-end toolkit for finding, reviewing, and downloading satellite
   imagery (Sentinel-1, Sentinel-2, Landsat 8/9, NISAR, MODIS, Sentinel-6)

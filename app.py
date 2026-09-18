@@ -1,4 +1,4 @@
-"""Satellite Data Search Toolkit — one interactive dashboard covering the
+"""Satellite Data Search and Overpass Forecast Toolkit — one interactive dashboard covering the
 whole pipeline: draw an AOI, search Sentinel-1/2, Landsat, NISAR, MODIS and
 Sentinel-6, review results on a map, download filtered scenes, forecast
 future overpasses, track satellites live, and sync the project to GitHub.
@@ -32,7 +32,7 @@ from aoi_export import export_all, load_geometry
 
 # --------------------------------------------------------------- page setup --
 
-st.set_page_config(page_title="Satellite Data Search Toolkit", page_icon="🛰️", layout="wide")
+st.set_page_config(page_title="Satellite Data Search and Overpass Forecast Toolkit", page_icon="🛰️", layout="wide")
 
 ESRI_IMAGERY = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
 ESRI_ATTR = "Tiles &copy; Esri"
@@ -177,7 +177,7 @@ tab_home, tab_aoi, tab_search, tab_download, tab_forecast, tab_orbit, tab_github
 
 # ============================================================== 0. OVERVIEW =
 with tab_home:
-    st.header("Satellite Data Search Toolkit")
+    st.header("Satellite Data Search and Overpass Forecast Toolkit")
     st.write(
         "An end-to-end pipeline for finding, reviewing, and downloading satellite imagery over an "
         "area of interest, plus tools for planning field campaigns around future satellite passes."

@@ -65,7 +65,7 @@ def build_pdf(filename, title, subtitle, blocks):
         title=title,
     )
     story = [
-        Paragraph("🛰️ Satellite Data Search Toolkit", STYLES["subtitle"]),
+        Paragraph("🛰️ Satellite Data Search and Overpass Forecast Toolkit", STYLES["subtitle"]),
         Paragraph(title, STYLES["title"]),
         Paragraph(subtitle, STYLES["subtitle"]),
         HRFlowable(width="100%", thickness=1, color=TEAL, spaceAfter=14),
