@@ -191,19 +191,34 @@ with tab_home:
         )
         guide_expander("getting_started", label="📖 Open the Getting Started guide")
 
-    cols = st.columns(6)
-    stage_info = [
-        ("🗺️", "AOI", "Draw an area of interest and export it"),
-        ("🔍", "Search", "Sentinel-1/2, Landsat, NISAR, MODIS, Sentinel-6"),
-        ("⬇️", "Download", "Pull filtered scenes from EE or the real archive"),
-        ("📅", "Forecast", "Predict future overpasses from real acquisition patterns"),
-        ("🛰️", "Live Tracker", "Real-time satellite positions via TLE propagation"),
-        ("🔗", "GitHub", "Push the project to a private repo"),
+    # Each row: (tab label as shown in the tab bar, what it does, is it done?)
+    # "Done" drives the ▶ marker so this panel tells you which tab to click next.
+    stages = [
+        ("🗺️ AOI", "Draw an area of interest and export it",
+         st.session_state["aoi_geometry"] is not None),
+        ("🔍 Search", "Find scenes across Sentinel-1/2, Landsat, NISAR, MODIS, Sentinel-6",
+         isinstance(st.session_state["results_df"], pd.DataFrame) and not st.session_state["results_df"].empty),
+        ("⬇️ Download", "Pull the filtered scenes to disk",
+         downloads_present),
+        ("📅 Forecast", "Predict future overpasses from real acquisition patterns",
+         st.session_state["forecast_df"] is not None),
+        ("🛰️ Live Tracker", "Real-time satellite positions via TLE propagation",
+         st.session_state["orbit_snapshot"] is not None),
+        ("🔗 GitHub", "Push the project to a private repo",
+         False),  # no reliable signal, so never marked done
     ]
-    for col, (icon, title, desc) in zip(cols, stage_info):
-        with col:
-            st.markdown(f"### {icon} {title}")
-            st.caption(desc)
+
+    next_stage = next((label for label, _, done in stages if not done), None)
+    if st.session_state["ee_ready"] and next_stage:
+        st.success(f"**Next step:** open the **{next_stage}** tab above.")
+
+    st.markdown("#### Pipeline")
+    for i, (label, desc, done) in enumerate(stages, start=1):
+        marker = "✅" if done else ("▶️" if label == next_stage else "⬜")
+        emphasis = "**" if label == next_stage else ""
+        st.markdown(f"{marker} &nbsp; {emphasis}{i}. {label}{emphasis} — {desc}")
+
+    st.caption("Use the tabs at the top of the page to move between steps.")
 
     st.divider()
     if isinstance(st.session_state["results_df"], pd.DataFrame) and not st.session_state["results_df"].empty:
