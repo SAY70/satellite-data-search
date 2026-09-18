@@ -60,6 +60,7 @@ GUIDES = {
     "forecast": ("04_Forecast_Guide.pdf", "Forecast Guide", "How to read predicted-overpass confidence"),
     "orbit": ("05_Live_Tracker_Guide.pdf", "Live Tracker Guide", "What physics-based tracking can and can't tell you"),
     "github": ("06_GitHub_Sync_Guide.pdf", "GitHub Sync Guide", "Personal Access Tokens, step by step"),
+    "troubleshooting": ("07_Troubleshooting.pdf", "Troubleshooting", "Common errors, what causes them, how to fix them"),
 }
 
 
@@ -724,7 +725,7 @@ with tab_help:
     )
     st.divider()
 
-    order = ["getting_started", "aoi", "search", "download", "forecast", "orbit", "github"]
+    order = ["getting_started", "troubleshooting", "aoi", "search", "download", "forecast", "orbit", "github"]
     for key in order:
         filename, title, blurb = GUIDES[key]
         path = GUIDES_DIR / filename

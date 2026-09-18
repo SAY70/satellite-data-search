@@ -132,6 +132,50 @@ docs/images/                 # README diagrams (source: docs/generate_diagrams.p
 
 Python 3.10+, and see [requirements.txt](requirements.txt). Free accounts needed: [Google Earth Engine](https://code.earthengine.google.com/register), [NASA Earthdata](https://urs.earthdata.nasa.gov/) (downloads only), [GitHub](https://github.com/) (optional, for the sync feature).
 
+## Understanding the data
+
+This toolkit finds and fetches scenes; these are where to learn what the pixels actually mean — band definitions, scaling factors, and QA bit flags.
+
+**Earth Engine collections used**
+
+| Product | Catalog page |
+|---|---|
+| Sentinel-2 L2A (Surface Reflectance) | [COPERNICUS/S2_SR_HARMONIZED](https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED) |
+| Sentinel-2 L1C (Top-of-Atmosphere) | [COPERNICUS/S2_HARMONIZED](https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_HARMONIZED) |
+| Landsat 8 C2 L2 | [LANDSAT/LC08/C02/T1_L2](https://developers.google.com/earth-engine/datasets/catalog/LANDSAT_LC08_C02_T1_L2) |
+| Landsat 9 C2 L2 | [LANDSAT/LC09/C02/T1_L2](https://developers.google.com/earth-engine/datasets/catalog/LANDSAT_LC09_C02_T1_L2) |
+| MODIS Terra / Aqua Vegetation | [MOD13Q1](https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MOD13Q1) · [MYD13Q1](https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MYD13Q1) |
+| MODIS Terra / Aqua Snow Cover | [MOD10A1](https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MOD10A1) · [MYD10A1](https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MYD10A1) |
+
+**Archive-sourced products**
+
+- **Sentinel-1** — [SentiWiki mission docs](https://sentiwiki.copernicus.eu/web/s1-mission) (GRD vs SLC, IW mode, polarization)
+- **NISAR** — [ASF NISAR documentation](https://asf.alaska.edu/nisar/) (GCOV, RSLC, and the provisional data tier)
+- **HLS** — [HLSS30 v2](https://lpdaac.usgs.gov/products/hlss30v002/) · [HLSL30 v2](https://lpdaac.usgs.gov/products/hlsl30v002/) (harmonized 30 m grid, Fmask bits)
+- **Sentinel-6** — [PO.DAAC mission page](https://podaac.jpl.nasa.gov/Sentinel-6)
+
+**Cross-checking a search**
+
+If a sensor returns zero scenes and you want to confirm that's real rather than a bug, run the same AOI and dates through the mission's own web tool:
+
+- [ASF Vertex](https://search.asf.alaska.edu/) — Sentinel-1 and NISAR
+- [NASA Earthdata Search](https://search.earthdata.nasa.gov/) — anything CMR-hosted
+- [CMR Search API docs](https://cmr.earthdata.nasa.gov/search/site/docs/search/api.html) — the API this toolkit queries
+- [CelesTrak](https://celestrak.org/) and [skyfield](https://rhodesmill.org/skyfield/) — the TLE source and propagation library behind the Live Tracker
+
+## Troubleshooting
+
+Full details in **[docs/pdf/07_Troubleshooting.pdf](docs/pdf/07_Troubleshooting.pdf)** (also in the app's 📖 Help tab). The errors people hit most:
+
+| Symptom | Cause and fix |
+|---|---|
+| `Cannot authenticate: Invalid request.` | Google retired the copy-paste OAuth flow. This toolkit uses `auth_mode="localhost"` — if you see this, you're on an older copy. |
+| `ASFAuthenticationError: Failed to log in (401)` | Usually **not** a wrong password — authorize "Alaska Satellite Facility Data Access" at [your Earthdata apps](https://urs.earthdata.nasa.gov/profile/edit_applications), and use your Earthdata *username*, not your email. |
+| A sensor returns 0 scenes | Often correct. Sentinel-1 is tasked (not automatic), Sentinel-6 is ocean-only, NISAR is early-mission. Cross-check on ASF Vertex or Earthdata Search. |
+| `ensurepip ... non-zero exit status 1` on Windows | Path too long (260-char limit), often a OneDrive-synced folder. Create the venv somewhere short like `C:\venvs\sds`. |
+| `401 Unauthorized` from `api.github.com` | Token expired, revoked, mistyped, or you used your password — GitHub stopped accepting passwords in 2021. |
+| MODIS footprints cover the whole world | Expected — MODIS products here are global mosaics, so `aoi_cov_pct` is always ~100 and not a useful filter. |
+
 ## Contributing
 
 Bug reports, documentation fixes, and new sensors are all welcome — see [CONTRIBUTING.md](CONTRIBUTING.md) for how the code is organized and what it takes to add a mission.

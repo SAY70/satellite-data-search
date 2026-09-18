@@ -423,6 +423,100 @@ guide(
     ],
 )
 
+guide(
+    "07_Troubleshooting.pdf",
+    "Troubleshooting",
+    "Real errors people hit with this toolkit, what causes them, and how to fix each one.",
+    [
+        ("h2", "Earth Engine"),
+        ("p", "<b>ValueError: Set EE_PROJECT to your own Google Cloud project...</b>"),
+        ("p", "Working as intended. The toolkit ships with no project ID, because Earth Engine projects "
+              "are tied to one Google account and no shared default could work for everyone. Put your own "
+              "Project ID in the quotes (notebooks) or the sidebar field (app). See the Getting Started guide."),
+        ("p", "<b>EEException: Cannot authenticate: Invalid request.</b>"),
+        ("p", "Google retired the \"out-of-band\" OAuth flow, where you copied an authorization code from "
+              "a browser and pasted it back. Any code still calling a bare "
+              "<font face='Courier'>ee.Authenticate()</font> that falls back to that flow now fails this "
+              "way. This toolkit calls <font face='Courier'>ee.Authenticate(auth_mode=\"localhost\")</font>, "
+              "which opens your browser and completes automatically. If you still see this, you're running "
+              "an older copy — update it."),
+        ("p", "<b>EEException: Please authorize access to your Earth Engine account...</b>"),
+        ("p", "You have no cached credentials yet. Run the setup cell (or click Connect in the app) and "
+              "complete the browser sign-in. If it persists, delete the cached credentials file and retry — "
+              "on Windows it lives under <font face='Courier'>%USERPROFILE%\\.config\\earthengine\\</font>."),
+        ("p", "<b>Permission denied / project not registered</b>"),
+        ("p", "The Project ID is valid but that project isn't registered for Earth Engine, or you signed in "
+              "with a different Google account than the one you registered. Re-register at "
+              "<font face='Courier'>code.earthengine.google.com/register</font> and make sure the account "
+              "matches. Also check you used the Project <b>ID</b>, not the display name."),
+
+        ("h2", "Downloads (NASA Earthdata / ASF)"),
+        ("p", "<b>ASFAuthenticationError: Failed to log in with provided credentials (401)</b>"),
+        ("p", "Almost always <b>not</b> a wrong password. ASF requires you to authorize their application "
+              "against your Earthdata account before their API will accept you. Go to "
+              "<font face='Courier'>urs.earthdata.nasa.gov/profile/edit_applications</font>, find "
+              "<b>\"Alaska Satellite Facility Data Access\"</b> under Authorized Apps, approve it, and retry. "
+              "If it still fails, confirm you're using your Earthdata <b>username</b>, not the email address "
+              "you registered with — they are often different."),
+        ("p", "<b>A download stops partway and won't resume</b>"),
+        ("p", "Safe to just re-run. Downloads write to a temporary <font face='Courier'>.part</font> file "
+              "and are only renamed once complete, so an interrupted transfer is never mistaken for a "
+              "finished one. Completed files are skipped."),
+
+        ("h2", "Search results"),
+        ("p", "<b>A sensor returns 0 scenes</b>"),
+        ("p", "Usually correct, not a bug. The three common reasons:"),
+        ("table", ["Sensor", "Why it can legitimately return nothing"], [
+            ["Sentinel-1", "Acquisition is tasked by ESA, not automatic. The satellite flies over on "
+                           "schedule, but whether it collects your AOI is a planning decision that "
+                           "changes over time."],
+            ["Sentinel-6", "Ocean-only altimetry. A land AOI will always return zero."],
+            ["NISAR", "Early-mission/commissioning phase, so coverage is still sparse and provisional."],
+        ], [1.2 * inch, 4.5 * inch]),
+        ("tip", "To confirm independently, search the same AOI and dates in the mission's own web tool — "
+                "ASF Vertex (<font face='Courier'>search.asf.alaska.edu</font>) for Sentinel-1/NISAR, or "
+                "NASA Earthdata Search (<font face='Courier'>search.earthdata.nasa.gov</font>) for anything "
+                "CMR-hosted. If those show nothing either, the data genuinely isn't there."),
+        ("p", "<b>MODIS footprints cover the whole world on the map</b>"),
+        ("p", "Expected. MODIS products here are global daily/composite mosaics, not swath-limited scenes, "
+              "so their footprint is the globe and <font face='Courier'>aoi_cov_pct</font> is always ~100%. "
+              "The coverage filter isn't meaningful for MODIS — filter by date and product instead."),
+
+        ("h2", "Notebooks and the app"),
+        ("p", "<b>The Jupyter kernel crashes in the search or forecast notebook</b>"),
+        ("p", "Usually memory pressure from large embedded map widgets accumulating in saved output. "
+              "Restart the kernel and clear outputs "
+              "(<font face='Courier'>jupyter nbconvert --clear-output --inplace *.ipynb</font>), then re-run "
+              "from the top."),
+        ("p", "<b>Map tiles show \"API KEY REQUIRED\" watermarks</b>"),
+        ("p", "CartoDB's basemap tiles now require an API key. The toolkit uses OpenStreetMap, which "
+              "doesn't. If you see this, you're on an older copy — update it."),
+        ("p", "<b>\"Connect to Earth Engine\" in the app does nothing useful</b>"),
+        ("p", "Enter your Project ID in the sidebar field first; the button refuses to run without one."),
+
+        ("h2", "Installation (Windows)"),
+        ("p", "<b>venv creation fails: ensurepip ... returned non-zero exit status 1</b>"),
+        ("p", "Windows' 260-character path limit. Creating a virtual environment inside a deeply nested "
+              "folder — especially a OneDrive-synced Desktop path — silently breaks pip bootstrapping. "
+              "Create the environment somewhere short instead:"),
+        ("code", "python -m venv C:\\venvs\\sds\nC:\\venvs\\sds\\Scripts\\activate\npip install -r requirements.txt"),
+        ("tip", "Either enable long-path support in Windows, or keep virtual environments out of "
+                "OneDrive-synced folders entirely — sync can also lock files mid-install."),
+
+        ("h2", "GitHub sync"),
+        ("p", "<b>401 Client Error: Unauthorized (api.github.com)</b>"),
+        ("p", "GitHub rejected the token itself — this is not a scope or permission problem (those return "
+              "403). Check that the token hasn't expired or been revoked, that no stray whitespace was "
+              "pasted with it, and that you're using a Personal Access Token rather than your account "
+              "password, which GitHub stopped accepting in 2021."),
+        ("p", "<b>Push rejected as non-fast-forward</b>"),
+        ("p", "The repository has commits you don't have locally — often from editing a file directly on "
+              "github.com. Run <font face='Courier'>git pull --rebase origin main</font>, resolve anything "
+              "that conflicts, then push again. Avoid force-pushing unless you're certain you want to "
+              "discard what's on the remote."),
+    ],
+)
+
 
 if __name__ == "__main__":
     for filename, title, subtitle, blocks in GUIDES:
