@@ -5,6 +5,7 @@
 <h1 align="center">Satellite Data Search and Overpass Forecast Toolkit</h1>
 
 <p align="center">
+  <a href="https://doi.org/10.5281/zenodo.22837461"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.22837461.svg" alt="DOI"></a>
   <img src="https://img.shields.io/badge/python-3.10%2B-0f766e" alt="Python 3.10+">
   <img src="https://img.shields.io/badge/license-GPL--3.0-0f766e" alt="GPL-3.0 License">
   <img src="https://img.shields.io/badge/tests-70%20passing-2ea043" alt="70 tests passing">
@@ -210,4 +211,10 @@ Credentials are never written to disk by this toolkit. See [SECURITY.md](SECURIT
 
 ## Citing this work
 
-See [CITATION.cff](CITATION.cff) — GitHub renders a "Cite this repository" button from it, and Zenodo reads it automatically when you tag a release.
+Archived on Zenodo. Use the **concept DOI** to cite the software generally — it always resolves to the newest release:
+
+> Yadav, S., Wijewardane, N., & Zhang, X. (2026). *Satellite Data Search and Overpass Forecast Toolkit*. Zenodo. https://doi.org/10.5281/zenodo.22837461
+
+To cite **this exact version** (v1.0.0), use the version DOI instead: [10.5281/zenodo.22837462](https://doi.org/10.5281/zenodo.22837462).
+
+Machine-readable metadata is in [CITATION.cff](CITATION.cff) — GitHub renders a "Cite this repository" button from it, and Zenodo reads it on each new release.

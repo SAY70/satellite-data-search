@@ -26,7 +26,17 @@ repository-code: "https://github.com/SAY70/satellite-data-search"
 url: "https://github.com/SAY70/satellite-data-search"
 license: GPL-3.0-only
 version: "1.0.0"
-date-released: "2026-09-17"
+date-released: "2026-09-18"
+# Concept DOI: always resolves to the newest release. Cite this for the
+# software in general; use the version DOI below for v1.0.0 specifically.
+doi: "10.5281/zenodo.22837461"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.22837462"
+    description: "Archived snapshot of version v1.0.0 on Zenodo"
+  - type: doi
+    value: "10.5281/zenodo.22837461"
+    description: "Concept DOI representing all versions"
 keywords:
   - remote sensing
   - Google Earth Engine
