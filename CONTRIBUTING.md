@@ -12,7 +12,7 @@ pip install -r requirements.txt
 
 You'll need your own free accounts before anything runs:
 
-- **Google Earth Engine** — register a Cloud project at [code.earthengine.google.com/register](https://code.earthengine.google.com/register). The project ID in the committed notebooks belongs to the original author and won't work for you.
+- **Google Earth Engine** — register a Cloud project at [code.earthengine.google.com/register](https://code.earthengine.google.com/register), then set `EE_PROJECT` in the notebooks (or the sidebar field in the app) to your project ID.
 - **NASA Earthdata** — [urs.earthdata.nasa.gov](https://urs.earthdata.nasa.gov/), only needed to test the download step.
 
 [docs/pdf/00_Getting_Started.pdf](docs/pdf/00_Getting_Started.pdf) walks through the whole setup.

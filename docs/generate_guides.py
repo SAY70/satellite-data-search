@@ -136,11 +136,11 @@ guide(
               "services, each needing its own free account: <b>Google Earth Engine</b> (imagery search), "
               "<b>NASA Earthdata</b> (real archive downloads), and optionally <b>GitHub</b> (to back up "
               "your project). None of this costs money for normal personal/research use."),
-        ("warn", "The <b>Earth Engine project ID</b> already filled into the notebooks and app "
-                 "(<font face='Courier'>rosy-precinct-498822-e1</font>) belongs to this toolkit's original "
-                 "author. It will <b>not</b> work for you — Earth Engine projects are tied to one Google "
-                 "account. You must create your own and replace that value everywhere before anything "
-                 "connects to Earth Engine."),
+        ("warn", "<b>EE_PROJECT is intentionally blank</b> in the notebooks, and the app's project field "
+                 "starts empty. Earth Engine projects are tied to one Google account, so there is no shared "
+                 "default that could work for everyone — you must create your own (Step 2) and fill it in "
+                 "before anything connects to Earth Engine. Leaving it blank raises a clear error telling "
+                 "you exactly that."),
 
         ("h2", "Step 1 — Install Python packages"),
         ("p", "From the project folder, install everything the toolkit needs:"),
@@ -163,14 +163,18 @@ guide(
                 "billing account for normal-sized research use."),
 
         ("h2", "Step 3 — Point the toolkit at your project"),
-        ("p", "Replace the project ID everywhere it appears with your own:"),
+        ("p", "Fill your Project ID into the blank in each place it's needed:"),
         ("bullet", [
             "In every notebook (<font face='Courier'>1_AOI_Selection.ipynb</font> through "
             "<font face='Courier'>4_Future_Overpass_Forecast.ipynb</font>): find the line "
-            "<font face='Courier'>EE_PROJECT = \"...\"</font> near the top and put your Project ID "
+            "<font face='Courier'>EE_PROJECT = \"\"</font> near the top and put your Project ID "
             "between the quotes.",
             "In the dashboard app: type your Project ID into the <b>\"Earth Engine project\"</b> box in "
             "the sidebar before clicking Connect.",
+            "For downloads, also set <font face='Courier'>EARTHDATA_USERNAME = \"\"</font> in "
+            "<font face='Courier'>3_Download_Filtered_Scenes.ipynb</font> (Step 5 below), and "
+            "<font face='Courier'>GITHUB_USERNAME = \"\"</font> in "
+            "<font face='Courier'>6_Push_To_GitHub.ipynb</font> if you use the sync step.",
         ]),
 
         ("h2", "Step 4 — Sign in (no code to copy/paste)"),

@@ -5,3 +5,4 @@ __pycache__/
 *.bak
 streamlit_log*.txt
 .streamlit/
+RELEASE_CHECKLIST.md

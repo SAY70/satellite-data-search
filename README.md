@@ -32,7 +32,7 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-**First time?** You'll need your own free Google Earth Engine project (the one baked into this repo belongs to the original author and won't work for you), and optionally a NASA Earthdata login for downloads. **[docs/pdf/00_Getting_Started.pdf](docs/pdf/00_Getting_Started.pdf) walks through the whole setup in about 10 minutes**, with no OAuth code to copy/paste.
+**First time?** You'll need your own free Google Earth Engine project, and optionally a NASA Earthdata login for downloads. **[docs/pdf/00_Getting_Started.pdf](docs/pdf/00_Getting_Started.pdf) walks through the whole setup in about 10 minutes**, with no OAuth code to copy/paste.
 
 Every pipeline stage also has its own short PDF guide in [docs/pdf/](docs/pdf/), and is one click away from inside the app (📖 icon on every tab).
 

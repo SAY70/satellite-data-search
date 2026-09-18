@@ -10,6 +10,7 @@ authors:
   - family-names: "Yadav"
     given-names: "Suraj"
     alias: "SAY70"
+    orcid: "https://orcid.org/0000-0002-0666-7629"
     email: "surajspce@gmail.com"
     affiliation: "Mississippi State University"
 repository-code: "https://github.com/SAY70/satellite-data-search"

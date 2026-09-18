@@ -112,10 +112,10 @@ with st.sidebar:
 
     st.subheader("Project config")
     ee_project = st.text_input(
-        "Earth Engine project", value="rosy-precinct-498822-e1",
-        help="This default belongs to the toolkit's original author and won't work for you. "
-             "Replace it with your own Google Cloud project ID — see the Getting Started guide "
-             "(Overview or Help tab) if you don't have one yet.",
+        "Earth Engine project", value="", placeholder="your-gee-project-id",
+        help="Your own Google Cloud project ID with the Earth Engine API enabled. "
+             "Register one free at https://code.earthengine.google.com/register — see the "
+             "Getting Started guide (Overview or Help tab) if you don't have one yet.",
     )
     aoi_name = st.text_input("AOI name", value="my_aoi")
     output_dir = st.text_input("Output folder", value="output")
@@ -123,6 +123,12 @@ with st.sidebar:
     st.session_state["aoi_name"] = aoi_name
 
     if st.button("Connect to Earth Engine", type="primary" if not st.session_state["ee_ready"] else "secondary"):
+        if not ee_project.strip():
+            st.error(
+                "Enter your Earth Engine project ID first — register one free at "
+                "https://code.earthengine.google.com/register"
+            )
+            st.stop()
         try:
             ee.Initialize(project=ee_project)
             st.session_state["ee_ready"] = True
