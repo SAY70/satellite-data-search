@@ -2,8 +2,6 @@
   <img src="docs/images/banner.svg" alt="Satellite Data Search and Overpass Forecast Toolkit" width="100%">
 </p>
 
-<h1 align="center">Satellite Data Search and Overpass Forecast Toolkit</h1>
-
 <p align="center">
   <a href="https://doi.org/10.5281/zenodo.22837461"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.22837461.svg" alt="DOI"></a>
   <img src="https://img.shields.io/badge/python-3.10%2B-0f766e" alt="Python 3.10+">
