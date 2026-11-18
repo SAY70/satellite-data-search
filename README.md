@@ -199,7 +199,7 @@ Credentials are never written to disk by this toolkit. See [SECURITY.md](SECURIT
 
 | | Affiliation |
 |---|---|
-| **Suraj Yadav** ([0000-0002-0666-7629](https://orcid.org/0000-0002-0666-7629)) | Department of Agricultural and Biological Engineering, Mississippi State University |
+| **Suraj Yadav** ([0000-0002-8158-7207](https://orcid.org/0000-0002-8158-7207)) | Department of Agricultural and Biological Engineering, Mississippi State University |
 | **Nuwan Wijewardane** ([0000-0001-8962-9451](https://orcid.org/0000-0001-8962-9451)) | Department of Agricultural and Biological Engineering, Mississippi State University |
 | **Xin Zhang** | School of Environmental, Civil, Agricultural and Mechanical Engineering, University of Georgia |
 
